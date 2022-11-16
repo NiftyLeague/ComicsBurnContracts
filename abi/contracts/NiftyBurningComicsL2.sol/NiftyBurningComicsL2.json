@@ -158,42 +158,11 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "comicsBurningEndAt",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "comicsBurningStartAt",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
         "name": "_comics",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_comicsBurningStartAt",
-        "type": "uint256"
       }
     ],
     "name": "initialize",
@@ -223,19 +192,6 @@
   {
     "inputs": [],
     "name": "itemIndex",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "mintNiftyKeysStartAt",
     "outputs": [
       {
         "internalType": "uint256",

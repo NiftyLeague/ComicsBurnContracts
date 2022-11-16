@@ -15,14 +15,14 @@ contract NiftyBurningComicsL2 is OwnableUpgradeable, ReentrancyGuardUpgradeable,
   /// @dev NiftyLaunchComics address
   address public comics;
 
-  /// @dev NiftyLaunchComics burning start time
-  uint256 public comicsBurningStartAt;
+  // /// @dev NiftyLaunchComics burning start time
+  // uint256 public comicsBurningStartAt;
 
-  /// @dev NiftyKeys mint start time
-  uint256 public mintNiftyKeysStartAt;
+  // /// @dev NiftyKeys mint start time
+  // uint256 public mintNiftyKeysStartAt;
 
-  /// @dev NiftyLaunchComics burning end time
-  uint256 public comicsBurningEndAt;
+  // /// @dev NiftyLaunchComics burning end time
+  // uint256 public comicsBurningEndAt;
 
   /// @dev Item index
   uint256 public itemIndex;
@@ -30,15 +30,12 @@ contract NiftyBurningComicsL2 is OwnableUpgradeable, ReentrancyGuardUpgradeable,
   /// @dev Token ID -> Item ID
   mapping(uint256 => uint256) public itemIdByTokenId;
 
-  function initialize(address _comics, uint256 _comicsBurningStartAt) public initializer {
+  function initialize(address _comics) public initializer {
     __Ownable_init();
     __ReentrancyGuard_init();
     __Pausable_init();
 
     comics = _comics;
-    comicsBurningStartAt = _comicsBurningStartAt;
-    mintNiftyKeysStartAt = _comicsBurningStartAt + 3600 * 24 * 15; // 15 days period
-    comicsBurningEndAt = _comicsBurningStartAt + 3600 * 24 * 30; // 30 days period
 
     // set the current item index
     itemIndex = 1;
@@ -47,17 +44,9 @@ contract NiftyBurningComicsL2 is OwnableUpgradeable, ReentrancyGuardUpgradeable,
   /**
    * @notice Burn comics and returns the items associated with its page
    * @dev User can burn all 6 comics at once to receive a key to the citadel
-   * @dev Burning comics are available only for 30 days
-   * @dev Key should be minted only for the last 15 days out of 30 days
    * @param _values Number of comics to burn, nth value means the number of nth comics(tokenId = n) to burn
    */
   function burnComics(uint256[] calldata _values) external nonReentrant whenNotPaused {
-    // check if burning comics is valid
-    require(
-      comicsBurningStartAt <= block.timestamp && block.timestamp <= comicsBurningEndAt,
-      "Burning comics is not valid"
-    );
-
     // check _values param
     require(_values.length == 6, "Invalid length");
 
@@ -66,16 +55,12 @@ contract NiftyBurningComicsL2 is OwnableUpgradeable, ReentrancyGuardUpgradeable,
     uint256[] memory tokenNumbersForItems = new uint256[](6);
     uint256[] memory tokenItemIndexs = new uint256[](6);
 
-    bool isForKeys = mintNiftyKeysStartAt < block.timestamp;
-
     // get tokenIds and the number of keys to mint
-    uint256 valueForKeys = isForKeys ? type(uint256).max : 0;
+    uint256 valueForKeys = type(uint256).max;
     for (uint256 i; i < _values.length; i++) {
-      if (isForKeys) {
-        // burning comics for keys
-        // get the min value in _values
-        if (_values[i] < valueForKeys) valueForKeys = _values[i];
-      }
+      // burning comics for keys
+      // get the min value in _values
+      if (_values[i] < valueForKeys) valueForKeys = _values[i];
 
       // set tokenIds
       tokenIds[i] = i + 1;

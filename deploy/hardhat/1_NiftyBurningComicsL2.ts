@@ -20,7 +20,7 @@ const NiftyBurningComicsL2: DeployFunction = async (hre: HardhatRuntimeEnvironme
       execute: {
         init: {
           methodName: "initialize",
-          args: [process.env.COMICS_ADDRESS, process.env.COMICS_BURNING_START_AT],
+          args: [process.env.COMICS_ADDRESS],
         },
       },
     },
