@@ -15,15 +15,6 @@ contract NiftyBurningComicsL2 is OwnableUpgradeable, ReentrancyGuardUpgradeable,
   /// @dev NiftyLaunchComics address
   address public comics;
 
-  // /// @dev NiftyLaunchComics burning start time
-  // uint256 public comicsBurningStartAt;
-
-  // /// @dev NiftyKeys mint start time
-  // uint256 public mintNiftyKeysStartAt;
-
-  // /// @dev NiftyLaunchComics burning end time
-  // uint256 public comicsBurningEndAt;
-
   /// @dev Item index
   uint256 public itemIndex;
 
