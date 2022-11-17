@@ -66,7 +66,7 @@ module.exports = {
   namedAccounts: {
     deployer: {
       default: 0,
-      goerli: "0x790aaa0e29409EB7F7e560c13B532435C35F453A",
+      mainnet: "0x6C287e19065661Ca590A11CF0b419d1434991B67",
     },
   },
   etherscan: {
